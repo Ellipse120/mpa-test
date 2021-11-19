@@ -4,14 +4,16 @@
 
     <Toast />
 
-    <Button label="Submit" @click="showToast" />
+    <SpeedDial :model="items" direction="up" />
+
+    <Button label="Click Me" @click="showToast" />
     <Button icon="pi pi-check" class="p-button-rounded p-button-text" />
     <Button label="Link" class="p-button-link" />
   </div>
 </template>
 
 <script>
-import { onMounted } from "vue";
+import {onMounted, ref} from "vue";
 import { useToast } from "primevue/usetoast";
 
 export default {
@@ -20,6 +22,44 @@ export default {
     const toast = useToast();
 
     toast.add({ severity:'info', summary: 'Info Message', detail:'Message Content', life: 3000 });
+
+    const items = ref([
+      {
+        label: 'Add',
+        icon: 'pi pi-pencil',
+        command: () => {
+          toast.add({ severity: 'info', summary: 'Add', detail: 'Data Added' });
+        }
+      },
+      {
+        label: 'Update',
+        icon: 'pi pi-refresh',
+        command: () => {
+          toast.add({ severity: 'success', summary: 'Update', detail: 'Data Updated' });
+        }
+      },
+      {
+        label: 'Delete',
+        icon: 'pi pi-trash',
+        command: () => {
+          toast.add({ severity: 'error', summary: 'Delete', detail: 'Data Deleted' });
+        }
+      },
+      {
+        label: 'Upload',
+        icon: 'pi pi-upload',
+        command: () => {
+          window.location.hash = "/fileupload"
+        }
+      },
+      {
+        label: 'Vue Website',
+        icon: 'pi pi-external-link',
+        command: () => {
+          window.location.href = 'https://vuejs.org/'
+        }
+      }
+    ]);
 
     onMounted(() => {
       toast.add({ severity:'info', summary: 'Info Message', detail:'Message Content', life: 3000 });
@@ -33,6 +73,7 @@ export default {
     }
 
     return {
+      items,
       showToast
     }
   }
