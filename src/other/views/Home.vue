@@ -4,7 +4,7 @@
 
     <Toast />
 
-    <SpeedDial :model="items" direction="up" />
+    <SpeedDial :model="items" direction="up" :transitionDelay="80" showIcon="pi pi-bars" hideIcon="pi pi-times" buttonClass="p-button-outlined" />
 
     <Button label="Click Me" @click="showToast" />
     <Button icon="pi pi-check" class="p-button-rounded p-button-text" />
@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import {onMounted, ref} from "vue";
+import { onMounted, ref } from "vue";
 import { useToast } from "primevue/usetoast";
 
 export default {
